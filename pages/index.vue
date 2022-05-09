@@ -6,57 +6,63 @@
         class="d-flex align-items-center text-dark text-decoration-none"
       >
         
-        <span class="fs-4">ML5js Sentiment Analysis Demo</span>
+        <span class="fs-4">ML5js Sentiment Analysis Demo  <span class="badge bg-primary">Updated</span></span>
       </a>
     </header>
 
-    <div class="p-5 my-4 bg-light rounded-3 shadow">
+    <div class="p-5 my-4 bg-light rounded-3 shadow moverbox fadeintoview">
       <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold title">Sentiment Analysis</h1>
         <p class="col-md-8 fs-4 subtitle">
           Enter text below and ML5.js will be used in your browser to guess the
-          sentiment your input, in real time.
+          sentiment of your input, in real time.
         </p>
       </div>
     </div>
 
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
-        <div class="h-100 p-5 bg-light rounded-3 shadow">
+        <div class="h-100 p-5 bg-light rounded-3 shadow moverbox fadeintoview">
           <textarea 
             class="form-control form-control-lg h-100"
             :placeholder="words[i]"
             aria-label=".form-control-lg example"
             v-model="text"
+            style="resize: none;"
             
           />
         </div>
       </div>
       <div class="col-md-6">
-        <div class="h-100 p-5 bg-light rounded-3 shadow">
-          <h2>Score</h2>
-          <h1>{{ Math.round(prediction.score * 100) }}%</h1>
+        <div class="h-100 p-5 bg-light rounded-3 shadow moverbox fadeintoview">
+          <div v-if="prediction" class="fadeintoview">
+            <h2>Score</h2>
+            <h1>{{ Math.round(prediction.score * 100) }}%</h1>
 
-          <div class="progress">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              :style="
-                'width:' + Math.round(prediction.score * 100).toString() + '%'
-              "
-              aria-valuemin="0"
-              :aria-valuenow="Math.round(prediction.score * 100)"
-              aria-valuemax="100"
-            ></div>
+            <div class="progress">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                :style="
+                  'width:' + Math.round(prediction.score * 100).toString() + '%'
+                "
+                aria-valuemin="0"
+                :aria-valuenow="Math.round(prediction.score * 100)"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+          <div v-if="!prediction">
+            <h1>Give it a try! (˚Δ˚)b</h1>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="p-5 my-4 bg-light rounded-3 shadow">
+    <div class="p-5 my-4 bg-light rounded-3 shadow moverbox fadeintoview">
       <div class="container-fluid py-5">
         <h1 class="display-6 fw-bold">Details</h1>
-        <p class="col-md-8 fs-5">
+        <div class="col-md-8 fs-5">
           <ul style="list-style: none">
             <li><img src="https://ml5js.org/static/ml5_logo_purple-88e082b8dc81d8729f95bcc092db90c5.png" class="icon">Based on <a href="https://ml5js.org/">ML5.JS</a> <a href="https://learn.ml5js.org/#/reference/sentiment?id=sentiment-movie-reviews-model-biography">Sentiment Analysis</a></li>
             <li><img src="https://cdn-images-1.medium.com/max/1200/1*iDQvKoz7gGHc6YXqvqWWZQ.png" class="icon">Uses <a href="https://github.com/tensorflow/tfjs-examples/tree/482226b15a757f39871038f35b3b8aad7729e594/sentiment">Tensorflow.js model</a> from <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png" class="icon"> <a href="imdb.com">IMDB</a></li>
@@ -66,7 +72,7 @@
             <li><img src="https://pbs.twimg.com/profile_images/1366808543773384704/8qFXRmFc_400x400.png" class="icon">Fonts by <a href="https://fonts.google.com/">Google Fonts</a></li>
           </ul>
           
-        </p>
+        </div>
       </div>
     </div>
 
@@ -132,6 +138,18 @@ export default {
 
 }
 
+
+.moverbox {
+  position: relative;
+  top: 0;
+  left:0;
+  transition: top ease 0.25s;
+}
+.moverbox:hover {
+  top: -5px;
+  left: -5px;
+}
+
 .title {
   position:relative;
   top: 0;
@@ -189,5 +207,58 @@ a:active {
 
 a:visited {
   color: #545454;
+}
+
+
+.fadeintoview {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
